@@ -18,9 +18,9 @@ if (_units isEqualTo []) exitWith {};
 
 // Sort units by distance if there is a render limit greater than 0
 if (GVAR(renderLimit) > 0) then {
-    private _unitsWithDistance = GVAR(units) apply {[_x, ACE_player distance _x]};
+    private _unitsWithDistance = GVAR(units) apply {[ACE_player distance _x, _x]};
     _unitsWithDistance sort true;
-    _units = _unitsWithDistance apply {_x#0};
+    _units = _unitsWithDistance apply {_x#1};
 };
 
 private _renderedUnits = 0;
