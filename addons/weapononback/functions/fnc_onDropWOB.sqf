@@ -33,8 +33,7 @@ if (_droppedOntoPrimary) then {
     } forEach _possibleContainers;
 
     // Remove and replace fake weapon with actual weapon
-    private _weaponHolder = ACE_player getVariable [QGVAR(weaponHolder), objNull];
-    private _weaponsItems = (weaponsItemsCargo _weaponHolder)#0;
+    private _weaponsItems = [ACE_player] call FUNC(get);
     private _allWeaponsItems = weaponsItemsCargo _container;
     _allWeaponsItems deleteAt (_allWeaponsItems findIf { _x#0 == QGVAR(weapon) });
 

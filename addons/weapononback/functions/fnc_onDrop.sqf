@@ -72,8 +72,7 @@ if (_originIDC == IDC_PRIMARY_SLOT) then {
 
     // Add weapon on back to container if there is one
     if (secondaryWeapon ACE_player == QGVAR(weapon)) then {
-        private _weaponHolder = ACE_player getVariable [QGVAR(weaponHolder), objNull];
-        private _weaponsItems = (weaponsItemsCargo _weaponHolder)#0;
+        private _weaponsItems = [ACE_player] call FUNC(get);
         _allWeaponsItems pushBack _weaponsItems;
     };
 

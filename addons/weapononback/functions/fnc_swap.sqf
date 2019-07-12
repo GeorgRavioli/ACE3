@@ -12,9 +12,8 @@
  * Public: No
  */
 
-private _weaponHolder = ACE_player getVariable [QGVAR(weaponHolder), objNull];
 private _oldPrimary = (getUnitLoadout ACE_player)#0;
-private _newPrimary = (weaponsItemsCargo _weaponHolder) param [0, []];
+private _newPrimary = [ACE_player] call FUNC(get);
 
 ACE_player removeWeapon (_oldPrimary param [0, ""]);
 private _loadout = getUnitLoadout ACE_player;
