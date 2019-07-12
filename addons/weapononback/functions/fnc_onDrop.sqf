@@ -20,13 +20,7 @@ params ["_dropCatcher", "", "", "_originIDC", "_info"];
 private _weaponsItems = [];
 
 if (_originIDC == IDC_PRIMARY_SLOT) then {
-    if (secondaryWeapon ACE_player == QGVAR(weapon)) then {
-        [] call FUNC(swap);
-    } else {
-        private _weaponsItems = (getUnitLoadout ACE_player)#0;
-        ACE_player removeWeapon _weaponsItems#0;
-        [ACE_player, _weaponsItems] call FUNC(add);
-    };
+    [] call FUNC(swap);
 } else {
     _info#0 params ["_displayName", "_index"];
 
@@ -51,6 +45,10 @@ if (_originIDC == IDC_PRIMARY_SLOT) then {
     };
 
     private _container = [_originIDC] call FUNC(getIDCContainer);
+    if (_container isKindOf "CAManBase") then {
+        _container = _container getVariable [QGVAR(droppedWeaponHolder), _container];
+    };
+
     private _allWeaponsItems = weaponsItemsCargo _container;
 
     // Get all weapons in container that have the name of the weapon that was taken

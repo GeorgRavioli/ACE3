@@ -25,7 +25,17 @@ if (_droppedOntoPrimary) then {
             uniformContainer ACE_player
         ]
     } else {
-        GVAR(openedContainers)
+        if (GVAR(openedContainers)#0 isKindOf "CAManBase") then {
+            // Weapons cannot be dropped onto dead bodies
+            [
+                // If the dropped primary of the unit wasn't taken yet, that holder is used
+                GVAR(openedContainers)#0 getVariable [QGVAR(droppedWeaponHolder), objNull],
+                // Otherwise a new one is created dynamically
+                nearestObject [ACE_player, "GroundWeaponHolder"]
+            ]
+        } else {
+            GVAR(openedContainers)
+        }
     };
 
     private _container = {

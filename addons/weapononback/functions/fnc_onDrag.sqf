@@ -25,6 +25,10 @@ private _isPrimary = if (_ctrlIDC == IDC_PRIMARY_SLOT) then {
     _info#0 params ["_displayName"];
 
     private _container = [_ctrlIDC] call FUNC(getIDCContainer);
+    if (_container isKindOf "CAManBase") then {
+        _container = _container getVariable [QGVAR(droppedWeaponHolder), _container];
+    };
+
     private _index = (weaponCargo _container) findIf {
         private _cfg = configFile >> "CfgWeapons" >> _x;
         (getText (_cfg >> "displayName") == _displayName)
@@ -35,7 +39,7 @@ private _isPrimary = if (_ctrlIDC == IDC_PRIMARY_SLOT) then {
 };
 
 if (!_isPrimary) exitWith {
-    TRACE_1("Dragged item is not a primary",_info#0);
+    TRACE_1("Dragged item is not a primary",_info);
 };
 
 // Set up drag and drop catcher
