@@ -28,7 +28,7 @@ if (!isNull _weaponHolder) then {
     deleteVehicle _weaponHolder;
 };
 
-_weaponHolder = "WeaponHolder_Single_F" createVehicleLocal [0, 0, 0];
+_weaponHolder = QGVAR(weaponHolder) createVehicleLocal [0, 0, 0];
 _weaponHolder attachTo [_unit, [0, 0, 0], "proxy:\a3\characters_f\proxies\launcher.001"];
 
 // Add weapon to weapon holder
