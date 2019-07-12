@@ -24,6 +24,7 @@ _primarySlot ctrlCommit 0;
 private _primaryBG = _display displayCtrl IDC_PRIMARY_BG;
 _primaryBG ctrlSetText "#(rgb,8,8,3)color(1,1,1,0.25)";
 
+// RscPicture does not trigger LBDrop
 private _dropCatcher = _display ctrlCreate ["ctrlActivePictureKeepAspect", IDC_DROP_CATCHER];
 if (primaryWeapon ACE_player == "") then {
     _dropCatcher ctrlSetText "a3\ui_f\data\GUI\Rsc\RscDisplayGear\ui_gear_primary_gs.paa";

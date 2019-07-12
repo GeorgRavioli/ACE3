@@ -10,12 +10,12 @@
 
     _inventoryEHs = [
         _newUnit addEventHandler ["InventoryOpened", {
-            params ["", "_fst", "_snd"];
+            params ["", "_firstContainer", "_secondContainer"];
 
-            if (isNull _snd) then {
-                _snd = _fst;
+            if (isNull _secondContainer) then {
+                _secondContainer = _firstContainer;
             };
-            GVAR(openedContainers) = [_fst, _snd];
+            GVAR(openedContainers) = [_firstContainer, _secondContainer];
         }],
         _newUnit addEventHandler ["InventoryClosed", {
             GVAR(openedContainers) = [objNull, objNull];
