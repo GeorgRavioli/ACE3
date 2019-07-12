@@ -21,3 +21,11 @@ class Extended_DisplayLoad_EventHandlers {
         ADDON = QUOTE(call FUNC(onInventoryOpened));
     };
 };
+
+class Extended_Init_EventHandlers {
+    class WeaponHolderSimulated {
+        class ADDON {
+            init = QUOTE(_this call FUNC(onWHSInit));
+        };
+    };
+};
