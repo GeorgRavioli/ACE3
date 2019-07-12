@@ -15,10 +15,41 @@
 private _oldPrimary = (getUnitLoadout ACE_player)#0;
 private _newPrimary = [ACE_player] call FUNC(get);
 
+// Save scope adjustment
+private _adjustments = ACE_player getVariable [QEGVAR(scopes,adjustment), [[0, 0, 0], [0, 0, 0], [0, 0, 0]]];
+private _oldAdjustment = _adjustments#0;
+private _newAdjustement = ACE_player getVariable [QGVAR(scopeAdjustment), [0, 0, 0]];
+EGVAR(scopes,guns) set [0, ""];
+
 ACE_player removeWeapon (_oldPrimary param [0, ""]);
-private _loadout = getUnitLoadout ACE_player;
-_loadout set [0, _newPrimary];
-ACE_player setUnitLoadout _loadout;
+
+if !(_newPrimary isEqualTo []) then {
+    _newPrimary params ["_weapon"];
+
+    ACE_player addWeapon _weapon;
+    removeAllPrimaryWeaponItems ACE_player;
+
+    {
+        ACE_player addWeaponItem [_weapon, _x, true];
+    } forEach (_newPrimary select [1, 6]);
+
+    ACE_player selectWeapon _weapon;
+
+    // Restore scope adjustment
+    [{
+        EGVAR(scopes,guns)#0 != ""
+    }, {
+        params ["_oldAdjustment", "_newAdjustement"];
+
+        if !(_newAdjustement isEqualTo [0, 0, 0]) then {
+            private _scopeAdjustmentParams = [ACE_player];
+            _scopeAdjustmentParams append (ACE_player getVariable [QGVAR(scopeAdjustment), [0, 0, 0]]);
+            _scopeAdjustmentParams call EFUNC(scopes,applyScopeAdjustment);
+        };
+
+        ACE_player setVariable [QGVAR(scopeAdjustment), _oldAdjustment];
+    }, [_oldAdjustment, _newAdjustement]] call CBA_fnc_waitUntilAndExecute;
+};
 
 if (_oldPrimary isEqualTo []) then {
     [ACE_player] call FUNC(remove);
