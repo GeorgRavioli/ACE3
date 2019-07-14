@@ -10,7 +10,7 @@
             <German>Renderlimit</German>
         </Key>
         <Key ID="STR_ACE_WeaponOnBack_RenderLimitDescription">
-            <English>Limit the amount of weapon on backs to be rendered (-1 for no limit).</English>
+            <English>Limit the amount of weapons on backs to be rendered (-1 for no limit).</English>
             <German>Limitiert die Anzahl der Waffen auf dem Rücken die gerendert werden (-1 bedeutet kein Limit).</German>
         </Key>
         <Key ID="STR_ACE_WeaponOnBack_CouldNotFit">
